@@ -2,6 +2,6 @@
   <node pkg="rcpcc" type="lidar_decode_node" name="lidar_decode" output="screen">
     <param name="lidar_restored_topic" value="/PCD_DATA0_restore"/>
     <param name="encoded_topic" value="/encoded_points"/>
-    <param name="q_level" value="5"/>
+    <param name="q_level" value="2"/>
   </node>
 </launch>

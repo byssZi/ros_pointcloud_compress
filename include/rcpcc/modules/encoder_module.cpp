@@ -3,6 +3,8 @@
 #include "../utils/pcc_module.h"
 #include "serializer.h"
 #include "binary_compressor.h"
+EncoderModule::EncoderModule() {}
+
 EncoderModule::EncoderModule(float pitch_precision, float yaw_precision, float threshold,
                              int tile_size, int q_level) : pitch_precision(pitch_precision), yaw_precision(yaw_precision),
                                                            threshold(threshold), tile_size(tile_size), q_level(q_level)

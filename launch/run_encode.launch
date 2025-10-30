@@ -2,6 +2,6 @@
   <node pkg="rcpcc" type="lidar_encode_node" name="lidar_encode" output="screen">
     <param name="lidar_topic" value="/PCD_DATA0"/>
     <param name="encoded_topic" value="/encoded_points"/>
-    <param name="q_level" value="5"/>
+    <param name="q_level" value="2"/>
   </node>
 </launch>

@@ -27,6 +27,7 @@ public:
   std::vector<point_cloud> restored_pcloud;
 
 public:
+  DecoderModule();
   DecoderModule(float pitch_precision, float yaw_precision, int tile_size);
   DecoderModule(const std::vector<char> &data, int tile_size, bool use_compress, int ksamlple=-1); // decode from data
 

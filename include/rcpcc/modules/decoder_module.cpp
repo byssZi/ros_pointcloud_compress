@@ -1,4 +1,5 @@
 #include "decoder_module.h"
+DecoderModule::DecoderModule(){}
 DecoderModule::DecoderModule(float pitch_precision, float yaw_precision, int tile_size) : pitch_precision(pitch_precision), yaw_precision(yaw_precision), tile_size(tile_size)
 {
 

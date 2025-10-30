@@ -19,7 +19,7 @@
 class LidarDecoder
 {
 public:
-    LidarDecoder(ros::NodeHandle& nh)
+    LidarDecoder(ros::NodeHandle& nh) : decoder_() // 初始化 DecoderModule
     {
         // 从参数服务器读取话题名称
         nh.param<std::string>("lidar_restored_topic", lidar_topic_, "/lidar_points");
@@ -41,6 +41,7 @@ private:
     std::string lidar_topic_;
     std::string encoded_topic_;
     int q_level_;
+    DecoderModule decoder_;
 
     void decodeCallback(const msg_all::CompressLidarConstPtr& msg)
     {
@@ -49,8 +50,8 @@ private:
         ROS_INFO("Received %zu bytes", decoded_data.size());
 
         // Decode point cloud
-        DecoderModule decoder(decoded_data, 4, true, q_level_);
-        auto restored_pcloud = decoder.restored_pcloud;
+        decoder_ = DecoderModule(decoded_data, 4, true, q_level_);
+        auto restored_pcloud = decoder_.restored_pcloud;
 
         // Convert restored data to PCL format
         pcl::PointCloud<pcl::PointXYZ>::Ptr restored_pcl_cloud(new pcl::PointCloud<pcl::PointXYZ>);

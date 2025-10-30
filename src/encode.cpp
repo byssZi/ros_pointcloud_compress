@@ -19,7 +19,7 @@
 class LidarEncoder
 {
 public:
-    LidarEncoder(ros::NodeHandle& nh)
+    LidarEncoder(ros::NodeHandle& nh) : encoder_() // 初始化 EncoderModule
     {
         // 从参数服务器读取话题名称
         nh.param<std::string>("lidar_topic", lidar_topic_, "/lidar_points");
@@ -41,6 +41,7 @@ private:
     std::string lidar_topic_;
     std::string encoded_topic_;
     int q_level_;
+    EncoderModule encoder_;
 
     void lidarCallback(const sensor_msgs::PointCloud2ConstPtr& msg)
     {
@@ -64,10 +65,9 @@ private:
             pc.z = cloud->points[i].z;
             pcloud_data.emplace_back(pc);
         }
-
+        encoder_ = EncoderModule(4, q_level_);
         // Encode point cloud
-        EncoderModule encoder(4, q_level_);
-        std::vector<char> encoded_data = encoder.encodeToData(pcloud_data, true);
+        std::vector<char> encoded_data = encoder_.encodeToData(pcloud_data, true);
 
         // 打包为 ROS 消息
         msg_all::CompressLidar encoded_msg;

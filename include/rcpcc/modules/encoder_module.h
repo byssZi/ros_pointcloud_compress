@@ -24,6 +24,7 @@ public:
   int q_level;//quantization level 
 
 public:
+  EncoderModule();
   EncoderModule(float pitch_precision, float yaw_precision, float threshold,
                 int tile_size,int q_level=-1);
   EncoderModule(int tile_size,int q_level);
